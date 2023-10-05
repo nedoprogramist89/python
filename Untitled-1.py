@@ -1,7 +1,6 @@
 import math
 
 exit = False
-
 while not exit:
     print("")
     print("Какую операцию вы хотите выполнить?")
@@ -16,8 +15,13 @@ while not exit:
     print("9 Косинус")
     print("10 Тангенс")
     print("11 Выйти из калькулятора")
-
-    v = int(input())
+    
+    try:
+        v = int(input())
+    except ValueError:
+        print("Ошибка: введите число.")
+        continue
+    
     r = 0
     t = ""
     q1 = 0
@@ -25,19 +29,34 @@ while not exit:
     m = 0
     s = 0
     l = 0
-
+    
     if 1 <= v <= 4:
-        q1 = int(input("Введите число 1: "))
-        q2 = int(input("Введите число 2: "))
+        try:
+            q1 = int(input("Введите число 1: "))
+            q2 = int(input("Введите число 2: "))
+        except ValueError:
+            print("Ошибка: введите число.")
+            continue
     elif 5 <= v <= 6:
-        m = int(input("Введите число: "))
+        try:
+            m = int(input("Введите число: "))
+        except ValueError:
+            print("Ошибка: введите число.")
+            continue
     elif v == 7:
-        s = int(input("Введите число: "))
-        l = int(input("Введите N: "))
-        
+        try:
+            s = int(input("Введите число: "))
+            l = int(input("Введите N: "))
+        except ValueError:
+            print("Ошибка: введите число.")
+            continue
     elif 8 <= v <= 10:
-        m = int(input("Введите число: "))
-
+        try:
+            m = int(input("Введите число: "))
+        except ValueError:
+            print("Ошибка: введите число.")
+            continue
+    
     if v == 1:
         r = q1 + q2
         t = "сложения"
@@ -55,9 +74,12 @@ while not exit:
         r = q1 * q2
         t = "умножения"
     elif v == 5:
-        r = math.factorial(m)
-        t = "факториала"
-   
+        if m >= 0:
+            r = math.factorial(m)
+            t = "факториала"
+        else:
+            print("Ошибка: нельзя вычислить факториал отрицательного числа.")
+            continue
     elif v == 6:
         if m >= 0:
             r = math.sqrt(m)
@@ -84,5 +106,5 @@ while not exit:
     else:
         print("Ошибка: неверный выбор операции.")
         continue
-
+    
     print("Результат " + t + " = " + str(r))
