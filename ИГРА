@@ -1,0 +1,82 @@
+import random
+
+
+events = [
+    "Сегодня Лео наткнулся на большую собаку. Что он сделает?",
+    "Лео встретил другого котенка во дворе. Как он отреагирует?",
+    "Лео услышал странный шум в подвале дома. Идти туда или уйти?",
+    "Сегодня Лео решил пойти на охоту. Сможет ли он поймать мышку?",
+]
+
+
+player_state = {
+    "имя": "Лео",
+    "здоровье": 100,
+    "счастье": 50,
+    "сытость": 80,
+}
+
+
+def choose_event():
+    event = random.choice(events)
+    print(f"\n{player_state['имя']}, событие: {event}\n")
+    print("1. Попробовать дружить с другим котенком.")
+    print("2. Попытаться убежать.")
+    print("3. Пойти в подвал.")
+    print("4. Пойти на охоту.")
+    choice = input(f"{player_state['имя']}, ваш выбор (1/2/3/4): ")
+
+    while choice not in ("1", "2", "3", "4"):
+        print("Пожалуйста, введите 1, 2, 3 или 4.")
+        choice = input(f"{player_state['имя']}, ваш выбор (1/2/3/4): ")
+
+    if choice == "1":
+        handle_friendship_event(event)
+    elif choice == "2":
+        handle_run_away_event(event)
+    elif choice == "3":
+        handle_basement_event(event)
+    elif choice == "4":
+        handle_hunting_event(event)
+
+
+def handle_friendship_event(event):
+    player_state["счастье"] += 10
+    print(f"{player_state['имя']} дружелюбно поприветствовал другого котенка.")
+
+
+def handle_run_away_event(event):
+    player_state["здоровье"] -= 10
+    print(f"{player_state['имя']} быстро убежал от опасности.")
+
+
+def handle_basement_event(event):
+    player_state["здоровье"] -= 20
+    print(f"{player_state['имя']} отправился в подвал и столкнулся с нечто страшным!")
+
+
+def handle_hunting_event(event):
+    player_state["сытость"] += 20
+    print(f"{player_state['имя']} успешно поймал мышку и поел.")
+
+
+def display_results():
+    print("\nИгра завершена. Состояние Лео:")
+    print(f"Имя: {player_state['имя']}")
+    print(f"Здоровье: {player_state['здоровье']}")
+    print(f"Счастье: {player_state['счастье']}")
+    print(f"Сытость: {player_state['сытость']}")
+
+
+def main():
+    print(f"Добро пожаловать в игру 'Приключения Лео', {player_state['имя']}!\n")
+    print(f"{player_state['имя']}, ваша цель - пройти через различные приключения и принимать решения.")
+    print("Давайте начнем ваше приключение!\n")
+
+    for _ in range(4):
+        choose_event()
+
+    display_results()
+
+if __name__ == "__main__":
+    main()
