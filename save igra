@@ -1,0 +1,422 @@
+import os
+import time
+import json
+import csv
+
+class NPC:
+    def __init__(self, name, dialogue):
+        self.name = name
+        self.dialogue = dialogue
+
+def save_game(data, filename):
+    with open(filename, 'w') as file:
+        json.dump(data, file)
+
+def load_game(filename):
+    try:
+        with open(filename, 'r') as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return None
+
+def delete_save(filename):
+    try:
+        os.remove(filename)
+        print(f"Сохранение '{filename}' удалено.")
+    except FileNotFoundError:
+        print(f"Сохранение '{filename}' не найдено.")
+
+def wait_for_input():
+    input("\nНажмите Enter для продолжения...\n")
+
+def clear_screen():
+    print("\033c", end="")
+
+def display_title():
+    clear_screen()
+    print("========================")
+    print("     Приключение        ")
+    print("========================\n")
+
+def display_game_over():
+    clear_screen()
+    print("Игра окончена!")
+    print("Жаль, что вы не справились.\n")
+import time
+
+class NPC:
+    def __init__(self, name, dialogue):
+        self.name = name
+        self.dialogue = dialogue
+
+def wait_for_input():
+    input("\nНажмите Enter для продолжения...\n")
+
+def clear_screen():
+    print("\033c", end="")
+
+def display_title():
+    clear_screen()
+    print("========================")
+    print("     Приключение        ")
+    print("========================\n")
+def resume_game(room_number):
+    while True:
+        if room_number == 1:
+            room_1()
+        elif room_number == 2:
+            room_2()
+        elif room_number == 3:
+            room_3()
+        elif room_number == 4:
+            room_4()
+        elif room_number == 5:
+            room_5()
+        elif room_number == 6:
+            room_6()
+        elif room_number == 7:
+            room_7()
+        elif room_number == 8:
+            room_8()
+        elif room_number == 9:
+            room_9()
+        elif room_number == 10:
+            room_10()
+        elif room_number == 11:
+            room_11()
+        elif room_number == 12:
+            room_12()
+        elif room_number == 13:
+            room_13()
+        elif room_number == 14:
+            room_14()
+        elif room_number == 15:
+            room_15()
+        else:
+            print("Недопустимый номер комнаты.")
+            start_game()
+def display_game_over():
+    clear_screen()
+    print("Игра окончена!")
+    print("Жаль, что вы не справились.\n")
+def new_game():
+    player_inventory.clear()
+    room_1()
+def load_saved_game():
+    filename = input("Введите имя файла сохранения (например, 'save.json'): ")
+    loaded_data = load_game(filename)
+
+    if loaded_data is not None:
+        global player_inventory
+        player_inventory = loaded_data.get("inventory", [])
+        room_number = loaded_data.get("room_number", 1)
+        display_title()
+        print("Игра успешно загружена.")
+        wait_for_input()
+        resume_game(room_number)
+    else:
+        print(f"Сохранение '{filename}' не найдено.")
+        start_game()
+player_inventory = []
+def room_0():
+    display_title()
+    print("Вы просыпаетесь в тёмной комнате.")
+    print("Вы не помните, как вы здесь оказались.")
+    print("Ваша задача - выбраться из комнаты и найти выход.")
+    wait_for_input()
+    room_1()
+def start_game():
+    display_title()
+    print("1. Новая игра")
+    print("2. Загрузить сохранение")
+    choice = input("Ваш выбор (1 или 2): ")
+
+    if choice == "1":
+        new_game()
+    elif choice == "2":
+        load_saved_game()
+    else:
+        print("Неверный выбор.")
+        start_game()
+
+def room_1():
+    display_title()
+    print("Вы находитесь в комнате с двумя дверями.")
+    print("1. Открыть первую дверь.")
+    print("2. Открыть вторую дверь.")
+    choice = input("Ваш выбор (1 или 2): ")
+    if choice == "1":
+        room_2()
+    elif choice == "2":
+        room_3()
+    else:
+        print("Вы ударились в стену и разбили себе голову.")
+
+def room_2():
+    display_title()
+    print("Вы открыли первую дверь и оказались в коридоре.")
+    print("В конце коридора вы видите персонажа.")
+    character = NPC("Старик", "Будьте осторожнее в этом замке.")
+    print(f'Персонаж: {character.name} - {character.dialogue}')
+    print("1. Продолжить путь вниз по коридору.")
+    print("2. Поговорить со стариком.")
+    choice = input("Ваш выбор (1 или 2): ")
+    if choice == "1":
+        room_4()
+
+    elif choice == "2":
+        print("Старик: Выбирайте двери аккуратно, не все из них ведут к свободе.")
+        wait_for_input()
+        room_2()
+    else:
+        room_2()
+def room_3():
+    display_title()
+    print("Вы открыли вторую дверь и оказались в тёмном подвале.")
+    print("Вы слышите странные звуки.")
+    wait_for_input()
+    display_game_over()
+
+def room_4():
+    display_title()
+    print("Вы спустились по лестнице и оказались в зале с четырьмя дверями.")
+    print("1. Открыть первую дверь.")
+    print("2. Открыть вторую дверь.")
+    print("3. Открыть третью дверь.")
+    print("4. Открыть четвёртую дверь.")
+    choice = input("Ваш выбор (1, 2, 3 или 4): ")
+    if choice == "1":
+        room_5()
+    elif choice == "2":
+        room_6()
+    elif choice == "3":
+        room_7()
+    elif choice == "4":
+        room_8()
+    else:
+        room_4()
+
+def room_5():
+    display_title()
+    print("Вы открыли первую дверь и видите ключ на столе.")
+    print("1. Взять ключ.")
+    print("2. Вернуться назад.")
+    choice = input("Ваш выбор (1 или 2): ")
+    if choice == "1":
+
+        room_9()
+    elif choice == "2":
+        room_4()
+    else:
+        room_5()
+
+def room_6():
+    display_title()
+    print("Вы открыли вторую дверь и оказались в комнате с монстром.")
+    print("Монстр нападает на вас!")
+    wait_for_input()
+    display_game_over()
+
+def room_7():
+    display_title()
+    print("Вы открыли третью дверь и увидели закрытый сундук.")
+    print("1. Открыть сундук ключем сундук.")
+    print("2. Вернуться назад.")
+    choice = input("Ваш выбор (1 или 2): ")
+    if choice == "1":
+        if "Ключ" in player_inventory:
+            print("Вы открыли сундук!")
+            room_10()
+        else:
+            print("У вас нет ключа, чтобы открыть этот сундук.")
+            wait_for_input()
+            room_7()
+
+    elif choice == "2":
+        room_4()
+    else:
+        room_7()
+
+def room_8():
+    display_title()
+    print("Вы открыли четвёртую дверь и видите спящего циклопа")
+    print("1. Попытаться пройти без шума.")
+    print("2. Попытаться убить его.")
+    print("3. Вернуться назад.")
+    choice = input("Ваш выбор (1 или 2): ")
+    if choice == "1":
+        room_11()
+    elif choice == "2":
+        display_game_over()
+    elif choice == "3":
+        room_4()
+    else:
+        room_8()
+def room_9():
+    display_title()
+    add_to_inventory("Ключ")
+    print("Вы взяли ключ.")
+    print("Теперь у вас есть ключ .")
+    wait_for_input()
+    room_4()
+
+def room_10():
+    display_title()
+    add_to_inventory("Карта")
+    print("Вы открыли сундук и нашли карту.")
+    print("На карте отмечено спрятанное сокровище.")
+    wait_for_input()
+    room_4()
+
+def room_11():
+    display_title()
+    print("Вы открыли дверь и оказались в замке.")
+    print("Вы видите трон на котором сидит КОРОЛЬ.")
+    print("1. Подойти к КОРОЛЮ.")
+    print("2.Пройти мимо.")
+    choice = input("Ваш выбор (1 или 2): ")
+    if choice == "1":
+        character = NPC("КОРОЛЬ", "Будьте осторожнее в этом замке.")
+        print(f'Персонаж: {character.name} - {character.dialogue}')
+        print("КОРОЛЬ: Ответь на мою загадку и я выпущу тебя отсюда.")
+        print("КОРОЛЬ: Но учти , пути назад уже не будет.")
+        print("1. Попыпаться ответить.")
+        print("2. Отказаться и пройти мимо.")
+        qwe = input("Ваш выбор (1 или 2): ")
+
+        if qwe == "1":
+           print("Я силен как скала, но одно слово может уничтожить меня. Кто я?.")
+           answer = input("Ваш ответ:")
+           if answer == "Тишина" or "тишина":
+               print("Молодец, вот дверь через которую ты можешь выйти.")
+               wait_for_input()
+               print("В стене появляется дверь.")
+               print("1. Зайти в эту дверь.")
+               print("2. Отказаться и пройти мимо.")
+               choice = input("Ваш выбор (1 или 2): ")
+
+               if choice == "1":
+                   finish_game()
+               elif choice == "2":
+                   room_12()
+
+           else:
+                 display_game_over()
+
+        elif  qwe == "2":
+            room_12()
+
+
+
+    elif choice == "2":
+        room_12()
+    else:
+        room_11()
+def room_12():
+    display_title()
+    print("Вы прошли мимо и увидели лесницу.")
+    print("Куда вы пойдёте?.")
+    print("1. Спуститься вниз.")
+    print("2. Подняться наверх.")
+    choice = input("Ваш выбор (1 или 2): ")
+    if choice == "1":
+          room_14()
+    elif choice == "2":
+        room_13()
+    else:
+        room_12()
+def room_13():
+    display_title()
+    print("Вы поднялись по лестнице и увидели птицу которая спит.")
+    print("1.Разбудить её.")
+    print("2.Ничего не делать.")
+    vibor = input("Ваш выбор (1 или 2): ")
+    if vibor == "1":
+        character = NPC("Птица", "Zzz")
+        print(f'Персонаж: {character.name} - {character.dialogue}')
+        print("Птица: Ой, давненько я никого не видела.")
+        print("Птица: Как же тебя зовут незнакомец?.")
+        name = input("Введите имя: ")
+        print(f"Птица: Рада познакомитья {name}")
+        print("Птица: Как же ты сюда попал?.")
+        print("1.Я проснулся уже тут.")
+        print("2.Нехочу говорить про это.")
+        kak = input("Ваш выбор (1 или 2): ")
+        if kak == "1":
+            print("Птица: И ничего не помнишь?.")
+            print("1.Вообще ничего.")
+            print("2.Я всё прекрасно помню.")
+            pomni = input("Ваш выбор (1 или 2):")
+            if pomni == "1":
+                print("Птица: Это плохо.")
+                print("Птица: Запомни когда дойдёшь до кругового зала ,НЕ заходи в синюю дверь.")
+                print("Птица: Ну удачи ,у меня много дел.")
+                room_12()
+            elif pomni == "2":
+                print("Птица: Тебе повезло,я вот ничего не помню с того дня как сюда попала.")
+                print("Птица: Запомни когда дойдёшь до кругового зала ,НЕ заходи в синюю дверь.")
+                print("Птица: Ну удачи ,мне кое что надо доделать.")
+                room_12()
+        elif kak == "2":
+            print("Птица: ((( единственный человек за 5 лет и то не обшительный.")
+            print("Птица: Мне такие не нравятся,уходи.")
+            room_12()
+    elif vibor == "2":
+        room_12()
+    else:
+        room_13()
+def room_14():
+    display_title()
+    print("Вы спустились по лестнице и увидели лежащую женщину которая просит помощи.")
+    print("1.Помочь ей.")
+    print("2.Не рисковать и пройти мимо.")
+    vibor = input("Ваш выбор (1 или 2): ")
+    if vibor == "1":
+        print("Вы подошли к ней и она напала на вас.")
+        display_game_over()
+    elif vibor == "2":
+        room_15()
+    else:
+        room_14()
+def room_15():
+    display_title()
+    print("Вы открыли дверь и увидели круговую комнату.")
+    print("В этой комнате есть синяя и красная дверь.")
+    print("1.Войти в синюю дверь.")
+    print("2.Войти в красную дверь.")
+    dver = input("Ваш выбор (1 или 2): ")
+    if dver == "1":
+        print("Вы открыли синюю дверь и оказались в комнате с шипами.")
+        print("Шипы пронзили вас и вы умерли!")
+        display_game_over()
+    elif dver =="2":
+        print("Вы открыли красную дверь и это был выход!")
+        finish_game()
+    else:
+        room_15()
+
+
+def finish_game():
+    clear_screen()
+    print("Поздравляю! Вы выбрались из комнаты и нашли выход!")
+    print("Спасибо за игру.")
+    print("Ваш инвентарь:", player_inventory)
+
+
+    save_data = {
+        "inventory": player_inventory,
+        "room_number": 1
+    }
+    save_game(save_data, 'save.json')
+
+
+    with open('game_results.csv', 'a', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow([player_inventory, time.strftime("%Y-%m-%d %H:%M:%S")])
+
+    print("\n==================================\n")
+    time.sleep(3)
+    clear_screen()
+def add_to_inventory(item):
+    player_inventory.append(item)
+start_game()
